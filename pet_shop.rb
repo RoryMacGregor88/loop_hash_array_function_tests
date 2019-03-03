@@ -19,39 +19,31 @@ end
 #8
 def find_pet_by_name(arr, name)
   arr[:pets].each do |i| return i if i[:name] == name end
-end
-#9
-def find_pet_by_name(arr, name)
-  arr[:pets].each do |i| return i if i[:name] == name end
   return nil
 end
-#10
+#9
 def remove_pet_by_name(arr, name)
   arr[:pets].each do |i| arr[:pets].delete(i) if i[:name] == name end
 end
-#11
+#10
 def add_pet_to_stock(arr, pet); arr[:pets].to_a << pet end
-#12
+#11
 def customer_cash(customer); return customer[:cash] end
-#13
+#12
 def remove_customer_cash(customer, amount); customer[:cash] -= amount end
-#14
+#13
 def customer_pet_count(customer); return customer[:pets].count end
-#15
+#14
 def add_pet_to_customer(customer, pet); customer[:pets].to_a << pet end
-#16
+#15
 def customer_can_afford_pet(customer, pet)
   return true if customer[:cash] > pet[:price]
   return false
 end
-#17
+#16
+def func(x, y, z)
+  z[:pets] << y; x[:admin][:pets_sold] += 1; z[:cash] -= y[:price]; x[:admin][:total_cash] += y[:price]
+end
 def sell_pet_to_customer(arr, hash, customer)
-  for i in arr[:pets]
-    if i == hash && customer[:cash] > hash[:price]
-      customer[:pets] << hash
-      arr[:admin][:pets_sold] += 1
-      customer[:cash] -= hash[:price]
-      arr[:admin][:total_cash] += hash[:price]
-    end
-  end
+  arr[:pets].each do |i| func(arr, hash, customer) if i == hash && customer[:cash] > hash[:price] end
 end
